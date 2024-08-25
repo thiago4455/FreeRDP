@@ -292,11 +292,9 @@ DWORD freerdp_keyboard_init(DWORD keyboardLayoutId)
 {
 	int status = -1;
 
-#if defined(__APPLE__)
 	if (status < 0)
 		status = freerdp_keyboard_init_apple(&keyboardLayoutId, X11_KEYCODE_TO_VIRTUAL_SCANCODE,
 		                                     ARRAYSIZE(X11_KEYCODE_TO_VIRTUAL_SCANCODE));
-#endif
 
 #if defined(WITH_X11) || defined(WITH_WAYLAND)
 
