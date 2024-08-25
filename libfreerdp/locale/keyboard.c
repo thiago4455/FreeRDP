@@ -296,24 +296,6 @@ DWORD freerdp_keyboard_init(DWORD keyboardLayoutId)
 		status = freerdp_keyboard_init_apple(&keyboardLayoutId, X11_KEYCODE_TO_VIRTUAL_SCANCODE,
 		                                     ARRAYSIZE(X11_KEYCODE_TO_VIRTUAL_SCANCODE));
 
-#if defined(WITH_X11) || defined(WITH_WAYLAND)
-
-#ifdef WITH_XKBFILE
-	if (status < 0)
-	{
-		status = freerdp_keyboard_init_xkbfile(&keyboardLayoutId, X11_KEYCODE_TO_VIRTUAL_SCANCODE,
-		                                       ARRAYSIZE(X11_KEYCODE_TO_VIRTUAL_SCANCODE));
-		if (status >= 0)
-			maptype = WINPR_KEYCODE_TYPE_XKB;
-	}
-#endif
-
-	if (status < 0)
-		status = freerdp_keyboard_init_x11_evdev(&keyboardLayoutId, X11_KEYCODE_TO_VIRTUAL_SCANCODE,
-		                                         ARRAYSIZE(X11_KEYCODE_TO_VIRTUAL_SCANCODE));
-
-#endif
-
 	if (status < 0)
 		WLog_DBG(TAG, "Platform keyboard detection failed, trying autodetection");
 
